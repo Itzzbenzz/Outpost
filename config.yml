@@ -1,0 +1,257 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                                                      | #
+# |             Outpost Plugin Configuration             | #
+# |                  Made By Benzimmer                   | #
+# |                                                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+SCOREBOARD:
+  USE_SCOREBOARD: false
+  UPDATE_TICKS: 20
+  SCOREBOARD_TITLE: '&a&lOutpost'
+  SCOREBOARD_LINES:
+  - '&6&lIn Control'
+  - '%controller%'
+  - ' '
+  - '&6&lAttempting Cap'
+  - 'Player(s): %capping_player%'
+  - 'Faction(s): %capping_faction%'
+  - ' '
+  - '&6&lPercent:'
+  - '%capping_percent%'
+  
+  DISABLE_IN_WORLD:
+  - world_spawn222
+  
+  # Only enable the scoreboard within a certain distance
+  # Please note this feature could cause some minor TPS drop
+  
+  SCOREBOARD_RADIUS:
+    ENABLED: false
+    DISTANCE: 30
+  
+  STAY_ACTIVE: false # Set this to true to keep the scoreboard active all the time
+  
+FEATHERBOARD_TRIGGER: 
+  ENABLED: true # If this is enabled then scoreboard will be disabled by default
+  SCOREBOARD_NAME: outpost # Name of the scoreboard in Featherboard you want to display
+  
+#################################################################
+#                                                               #
+#                          Shop Section                         #
+#                                                               #
+#################################################################
+  
+SHOP:
+  
+  # Use any colour codes or format
+  # %outpost% MUST BE THE FIRST WORD IN THE INV NAME
+  # Make sure %outpost% has a space after
+
+  NAME: '&2%outpost% Shop'
+  SIZE: 18
+  
+  # Close inventory upon interacting with the shop
+  
+  CLOSE_INV: true
+  
+  # This lore will be added on to all items in the shop
+  # Using %bprice% will give a beautified price
+  # Using %price% will give a normal price
+  
+  LORE: 
+  - ' '
+  - '&7Price: &a$%bprice%'  
+  
+#################################################################
+#                                                               #
+#                        Rewards Section                        #
+#                                                               #
+#################################################################
+  
+CAPTURED: # Multipliers can be set with /outpost multiplier <outpost> <type> <multipler>
+  EXP_DROPS: true
+  SPAWN_RATES: true
+  MOB_DROPS: true
+  DAMAGE_INCREASE: false # Set this to true to allow players to deal more damage while in control of outpost.
+  OUTPOST_LOCATION: true # This can be used with /f outpost for a specific location
+  SHOP: true # This can be accessed with /outpost shop
+  NO_HUNGER_LOSS: false # Players in control of the outpost have no hunger loss
+  MCMMO: false # Use this to enable McMMO multipliers
+  
+#################################################################
+#                                                               #
+#                        General Section                        #
+#                                                               #
+################################################################# 
+  
+OUTPOST:    
+  TASK_TICK_DELAY: 20
+  PERCENT_PER_TICK: 5 # Percent added to the outpost every tick
+  
+  OUTPOST_TELEPORT_DELAY: 10 # In seconds /outpost location <outpost> command
+  
+  SAVE_OWNERS_ON_RESTART: false # Set this to true to save controllers upon restarts/reloads
+  
+  MAX_OUTPOSTS_PER_TEAM:
+    ENABLED: false
+    AMOUNT: 1
+    COOLDOWN: 30 # This is in seconds
+  
+  BROADCAST_TIMES: # Percentages at which the outpost will broadcast
+  - 25
+  - 50
+  - 75
+  
+  DISABLE_BROADCASTS_IN_WORLDS: # Worlds that will not receive Outpost messages.
+  - example
+  
+  KNOCK_DELAY: 5 # This is to prevent chat spam when players walk on and off the outpost
+  
+  ALLOW_FULL_TEAM_CAPTURE: false # Allow the full team to be capturing rather than one player
+  
+  ALLOW_NO_TEAM_BROADCASTS: true # Allow players without a team to see outpost broadcasts
+  ALLOW_NO_TEAM_CAPTURE: true # Allow players without a team to capture the outpost
+  
+  PLAYER_COOLDOWN: # Enable this to prevent players from constantly switching controller
+    ENABLED: false
+    LENGTH: 300 # In seconds
+    MESSAGE_DELAY: 5 # In seconds
+  
+  PAUSE_OTHER_TEAMS: false # Pause control when another team is in area
+  
+  VIEW_COMMAND_PER_PERMISSION: false # View the commands you have permission for in /outpost help
+  
+  HOLOGRAM_EVENTS: # Use this feature to reload holograms to update with new cappers etc
+    NEW_CAPPER: false # Update when a new team/player starts capping
+    NEW_OWNER: false  # Update when a new team/player takes control
+    
+  CUSTOM_HOLOGRAM: # Use custom built in holograms
+    UPDATE_TICKS: 100
+    ENABLED: false
+    LINES:
+    - '&a&l%outpost%'
+    - '&a&lCapping: &7&l%capper%'
+    - '&a&lControlling: &7&l%capped_player%'
+    
+  SELL_WAND:
+    TYPE: STICK
+    AMOUNT: 1
+    DATA: 0
+    NAME: '&2&lOutpost Sell Wand'
+    LORE:
+    - '&7&l> Right-click to sell all items in a chest.'
+  
+  BLOCKED_CONTROLLER_CMDS: # These are commands that cannot be executed once in control of the outpost (OUTPOST.CMDBYPASS to bypass)
+  - /examplecmd
+      
+#################################################################
+#                                                               #
+#                      Command Section                          #
+#                                                               #
+# These commands are defined with /outpost addcmd <type> <cmd>  #
+#    You can specify variables %player%, %percent% %world%      #
+#                                                               #
+#################################################################
+  
+# In any of the types below you can specify: 
+
+# 'PLAYER' - The player interacting with the Outpost
+# 'LEADER' - The team leader
+# 'TEAM' - All players in the team
+# 'ZONE' - All players in zone
+  
+CAPTURE_COMMANDS: # Lose capture commands will automatically be run on anyone who had capture commands executed on them
+  TYPE: 'PLAYER'
+  
+REPEATING_COMMANDS:
+  TASK_DELAY: 30 # This is in seconds
+  TYPE: 'PLAYER'
+  
+#################################################################
+#                                                               #
+#                     Custom GUI Section                        #
+#                                                               #
+#################################################################
+
+CUSTOM_GUI: # This inventory will appear upon a player doing /outpost
+  ENABLED: true
+  
+  INV_SIZE: 27
+  INV_NAME: '&a&lOutposts'
+  
+  ITEMS:
+  
+    DUMMY-ITEM-1:
+      TYPE: STAINED_GLASS_PANE
+      AMOUNT: 1
+      DATA: 14
+      NAME: ' '
+      SLOTS:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+    
+    DUMMY-ITEM-2:
+      TYPE: STAINED_GLASS_PANE
+      AMOUNT: 1
+      DATA: 14
+      NAME: ' '
+      SLOTS:
+      
+  OUTPOSTS: # Here you can add multiple outposts
+  
+     TEST: # Enter the name of the specified outpost here
+       TYPE: GRASS
+       AMOUNT: 1
+       DATA: 0
+       NAME: '&2&lTest Outpost'
+       LORE:
+       - '&7&l> This is an example outpost.' # Placeholders can be used here
+       SLOTS:
+       - 13
+       RUN_COMMANDS:
+       - '/examplewarp testoutpost' # Run a command for the player
+       
+#################################################################
+#                                                               #
+#                   Forced Team Hook Section                    #
+#                                                               #
+#  Only use this section if you have multiple team plugins on   #
+#                   the supported plugin list                   #
+#                                                               #
+#################################################################    
+
+TOWNY_USE_NATIONS: false # Set this to true to enable nations instead of towns
+MCMMO_USE_PARTIES: false # Set this to true to enable McMMO parties
+
+# Please type the plugin name you want to force hook
+
+FORCED_HOOK:
+  ENABLED: false
+  PLUGIN: ''       
